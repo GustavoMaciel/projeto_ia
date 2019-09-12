@@ -3,3 +3,5 @@ keras
 numpy
 scipy
 gensim
+pandas
+sklearn
