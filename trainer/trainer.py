@@ -14,13 +14,8 @@ vocabulary, labels = lib.vocabulary_label_builder(settings.training_data_dir, se
 tokenized_vocabulary = lib.tokenized_vocabulary_builder(vocabulary)
 
 test_voc, test_labels = lib.vocabulary_label_builder(settings.testing_data_dir, settings.minimal_amount_of_repetitions)
-tokenized_test_voc = lib.tokenized_vocabulary_builder(test_voc)
-
-
-print(vocabulary[:2])
 
 dictionary = tokenized_vocabulary.word_index
-test_dictionary = tokenized_test_voc.word_index
 
 
 # lib.save_dictionary(settings.dictionary_location, dictionary)
@@ -46,7 +41,7 @@ Y = np.asarray(labels)
 #print(labels[40])
 
 
-test_tokens = tokenized_test_voc.texts_to_sequences(test_voc)
+test_tokens = tokenized_vocabulary.texts_to_sequences(test_voc)
 
 X_test = pad_sequences(test_tokens, input_dim)
 
@@ -62,6 +57,10 @@ Y_test = np.asarray(test_labels)
 input_dim = lib.get_input_dim(tokens)
 
 model = Sequential()
+
+# model.add(keras.layers.Embedding(input_dim, 16))
+# model.add(keras.layers.GlobalAveragePooling1D())
+
 # Dense é uma camada, primeiro parametro é numero de neuronios, input_dim é a qtd de entradas dos neuronios
 model.add(Dense(12, activation='relu', input_dim=input_dim))
 model.add(Dense(12, activation='relu'))
@@ -85,5 +84,4 @@ print(model.metrics_names)
 print('Loss: %f' % score)
 print('Accuracy: %f' % acc)
 
-
-
+print("\n", vocabulary[:2])
