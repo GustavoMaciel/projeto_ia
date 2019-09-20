@@ -33,6 +33,10 @@ def load_tokens(string):
     _string = " ".join(string.splitlines())
     pattern = r"[{}()\[\]\'\":.*\s,#=_/\\><;?\-|+]"
     result = re.split(pattern, _string)
+    tokens = []
+    for word in result:
+        if word.strip() != "" and word not in tokens:
+            tokens.append(word)
     return [word for word in result if word.strip() != ""]
 
 
@@ -52,9 +56,9 @@ def get_language_from_filename(file_name):
         index -= 1
     language = file_name[index+1:]
     if language.lower().endswith('java'):
-        language = "Java"
+        language = 0
     elif language.lower().endswith('py'):
-        language = "Python"
+        language = 1
     return language
 
 
