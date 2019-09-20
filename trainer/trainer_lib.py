@@ -34,9 +34,9 @@ def load_tokens(string):
     pattern = r"[{}()\[\]\'\":.*\s,#=_/\\><;?\-|+]"
     result = re.split(pattern, _string)
     tokens = []
-    for word in result:
-        if word.strip() != "" and word not in tokens:
-            tokens.append(word)
+    #for word in result:
+     #   if word.strip() != "" and word not in tokens:
+      #      tokens.append(word)
     return [word for word in result if word.strip() != ""]
 
 
@@ -74,6 +74,16 @@ def vocabulary_label_builder(train_dir, min_count):
 
     # vocabulary = [word for word, count in vocabulary.items() if count >= min_count]
     return vocabulary, languages
+
+
+def get_input_dim(vocabulary):
+    index = 0
+    min_index = 0
+    for i in vocabulary:
+        if len(i) < len(vocabulary[index]):
+            min_index = index
+        index += 1
+    return len(vocabulary[min_index])
 
 
 def tokenized_vocabulary_builder(vocabulary):
