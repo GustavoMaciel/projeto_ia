@@ -82,8 +82,14 @@ def tokenized_vocabulary_builder(vocabulary):
 
 
 def save_tokenized_vocabulary(location, tok_voc):
-    with open(location, 'wb', encoding='utf-8') as file:
+    with open(location, 'wb') as file:
         pickle.dump(tok_voc, file, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def load_tokenized_vocabulary(location):
+    with open(location, 'rb') as f:
+        tokenizer = pickle.load(f)
+    return tokenizer
 
 
 

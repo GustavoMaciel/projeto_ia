@@ -9,8 +9,6 @@ vocabulary_location = os.path.join(current_dir, "../trainer/vocabulary.txt")
 tokenized_vocabulary_location = os.path.join(current_dir, "../trainer/tokenized_vocabulary")
 dictionary_location = os.path.join(current_dir, "../trainer/word_index.json")
 
-word2vec_location = os.path.join(current_dir, "../trainer/word2vec.txt")
-
 model_file_location = os.path.join(current_dir, "../resources/models/model.json")
 model_weights_file_location = os.path.join(current_dir, "../resources/models/model_weights.h5")
 

@@ -15,13 +15,8 @@ tokenized_vocabulary = lib.tokenized_vocabulary_builder(vocabulary)
 
 test_voc, test_labels = lib.vocabulary_label_builder(settings.testing_data_dir, settings.minimal_amount_of_repetitions)
 
-dictionary = tokenized_vocabulary.word_index
 
-
-# lib.save_dictionary(settings.dictionary_location, dictionary)
-# lib.save_tokenized_vocabulary(settings.tokenized_vocabulary_location, tokenized_vocabulary)
-
-# word2vec_vocabulary = lib.word2vec_builder(settings.training_data_dir, tokenized_vocabulary)
+lib.save_tokenized_vocabulary(settings.tokenized_vocabulary_location, tokenized_vocabulary)
 
 # model_max_features = 10000
 # model = lib.model_builder(tokenized_vocabulary, vocabulary, labels, tokenized_test_voc, test_voc, test_labels,
@@ -79,9 +74,11 @@ model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy
 model.fit(X, Y, epochs=500, batch_size=5)
 score, acc = model.evaluate(X_test, Y_test, verbose=2, batch_size=2)
 
+model.save(settings.model_file_location)
+model.save_weights(settings.model_weights_file_location)
+
 print(f"\nInput dim: {input_dim}")
 print(model.metrics_names)
 print('Loss: %f' % score)
 print('Accuracy: %f' % acc)
 
-print("\n", vocabulary[:2])
